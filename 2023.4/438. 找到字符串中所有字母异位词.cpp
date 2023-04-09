@@ -2,13 +2,15 @@
 //但是在这一题中初态就是可能的解，所以需要在开头就判断一下，这就导致了最后一下更新之后如果后续状态还是valid的情况却不能进循环了，导致少了最后一个解
 //所以需要进循环之前额外判断一下，或者出循环之后判断一下
 
+//或者可以用滑动窗口的通用解法，开始令l=0，r=0，不去固定窗口大小了，先找到一个能完整覆盖的，窗口大了之后再去收缩
+
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
-        int l=0,r=0;
+        int l=0,r=p.size();
         unordered_map<char, int> window,need;
         for(char c:p) need[c]++;
-        r=l+p.size();
+        
         int valid=0;
         for(int i=0 ;i<r;i++){
             if(need.count(s[i])){
