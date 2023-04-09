@@ -1,0 +1,40 @@
+这道题没有一个全局的删除次数 k。而是对于每一个在字符串 s 中出现的字母 c 都有一个 k 值。这个 k 是 c 出现次数 - 1。
+
+沿用上面的知识的话，我们首先要做的就是计算每一个字符的 k，可以用一个字典来描述这种关系，其中 key 为 字符 c，value 为其出现的次数。
+
+作者：Trusting Antonelliyjp
+链接：https://leetcode.cn/problems/remove-duplicate-letters/solutions/290200/yi-zhao-chi-bian-li-kou-si-dao-ti-ma-ma-zai-ye-b-4/
+
+
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        unordered_map<char,int> remain_nums;
+        vector<char> stack;
+        // stack.push_back('a'-1);
+        unordered_set<char> char_in_stack;
+        for(char c:s){
+            remain_nums[c]++;
+        }
+
+        for(char c:s){
+
+            if(!char_in_stack.count(c)){ //c is not in stack
+                while(!stack.empty()&&c<stack.back()&&remain_nums[stack.back()]>0){
+                    char_in_stack.erase(stack.back());
+                    // remain_nums[stack.back()]--;
+                    stack.pop_back();
+                    
+                }
+                stack.push_back(c);
+                char_in_stack.insert(c);
+                
+            }
+            remain_nums[c]--;
+            
+        }
+
+        return string(stack.begin(),stack.end());
+
+    }
+};
