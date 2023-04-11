@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        if(nums.size()==0) return nums;
+        quick(nums, 0, nums.size());
+        return nums;
+
+
+    }
+    void quick(vector<int>& nums ,int l,int r){
+        if(r-l<2) return ;
+        int p=partion(nums, l,  r);
+        quick(nums, l, p);
+        quick(nums, p+1, r);
+
+    }
+    int partion(vector<int>& nums,int l,int r){
+        int p=(l+r)/2;
+        int pivot=nums[p];
+        swap(nums, p, r-1);
+        for(int i=l;i<r-1;i++){
+            if(nums[i]<pivot){
+                swap(nums, i, l);
+                l++;
+
+            }
+        }
+        swap(nums, r-1, l);
+        return l;
+        
+
+
+    }
+
+    void swap(vector<int>& nums,int l,int r){
+        int temp=nums[l];
+        nums[l]=nums[r];
+        nums[r]=temp;
+    }
+};
