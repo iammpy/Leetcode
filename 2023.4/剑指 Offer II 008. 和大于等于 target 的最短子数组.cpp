@@ -1,3 +1,6 @@
+//可以使用查分数组来求和，节省时间
+//滑动窗口，和寻找最小覆盖串的问题一样
+
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
