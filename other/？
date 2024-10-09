@@ -8,23 +8,26 @@ using namespace std;
 int main() {
     int n;
     cin>>n;
-
+    vector<int> res;
     for(int i=0;i<n;++i){
         int ai,bi,pi;
         cin>>ai;
         cin>>bi;
         cin>>pi;
-        int temp=ai;
+        int temp=ai%pi;
         int num=1;
         while(bi!=0){
             int k=bi%2;
             bi=bi/2;
-            if(k==1) num*=temp*k;
-            temp*=temp;
+            if(k==1) num=num*temp*k%pi;
+            temp*=temp%pi;
         }
 
-        cout<<num%pi<<endl;
+        res.push_back(num);
 
+    }
+    for(int i=0;i<n;i++){
+        cout<<res[i]<<endl;
     }
 
 
