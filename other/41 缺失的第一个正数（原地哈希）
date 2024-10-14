@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        //原地hash，每个数字回到这个数组中对应的位置，（1~n的数字），在此之外的数字不用考虑
+
+        int l=0;
+        for(int i=0;i<nums.size();i++){
+            int k=nums[i];
+            while(nums[i]>=1&&nums[i]<=nums.size()&&nums[i]!=i+1){
+                if(nums[nums[i]-1]!=nums[i]){
+                    swap(nums[nums[i]-1],nums[i]);
+                }else{
+                    //已经被保存过相同的数字了，当前数字舍弃
+                    nums[i]=-1;
+                }
+            }
+        }
+        int res=nums.size()+1;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]!=i+1) return i+1;
+        }
+        return res;
+
+
+
+    }
+};
